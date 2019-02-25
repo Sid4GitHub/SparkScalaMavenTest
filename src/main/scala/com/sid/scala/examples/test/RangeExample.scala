@@ -10,9 +10,8 @@ object RangeExample {
     //myRange.collect.foreach(println)
     val myRange2 = myRange.where("number % 2 = 0")
     val myRange3 = myRange2.where("number % 4 = 0")
-    println( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***------- -------- --------***\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" )
+    println( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n** * ---------------------- -***\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" )
     //myRange3.show()
     println(myRange3.count())
-	
   }
 }
