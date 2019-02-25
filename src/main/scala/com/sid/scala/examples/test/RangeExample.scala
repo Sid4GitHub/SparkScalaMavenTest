@@ -13,5 +13,6 @@ object RangeExample {
     println( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***-----------------------***\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" )
     //myRange3.show()
     println(myRange3.count())
+	
   }
 }
