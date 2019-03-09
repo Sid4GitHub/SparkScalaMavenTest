@@ -11,7 +11,10 @@ object SchemaInferenceExample {
       .read
       .option("inferSchema", "true")
       .option("header", "true")
-      .csv("/user/p2991042/data/flight-data/csv/2015-summary.csv")
+      .csv("/user/sid/data/flight-data/csv/2015-summary.csv")
+
+    val sc=flightData2015.schema
+
     println( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***-----------------------***\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" )
     flightData2015.show()
     println( "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n***-----------------------***\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" )

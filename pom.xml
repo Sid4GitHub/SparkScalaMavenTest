@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.sid.scala.fst</groupId>
+  <artifactId>scala-maven-test</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>${project.artifactId}</name>
+  <description>This is a Test project For Learning Sacala and Spark</description>
+
+
+  <properties>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <encoding>UTF-8</encoding>
+    <scala.tools.version>2.10</scala.tools.version>
+    <scala.version>2.12.8</scala.version>
+    <spark.version>2.4.0</spark.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.12</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-sql_2.12</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+
+
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/main/scala</sourceDirectory>
+    <testSourceDirectory>src/test/scala</testSourceDirectory>
+     
+    <plugins>
+      <plugin>
+        <!-- see http://davidb.github.com/scala-maven-plugin -->
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>3.1.3</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+            <configuration>
+              <args>
+
+                <arg>-dependencyfile</arg>
+                <arg>${project.build.directory}/.scala_dependencies</arg>
+              </args>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.13</version>
+        <configuration>
+          <useFile>false</useFile>
+          <disableXmlReport>true</disableXmlReport>
+          <!-- If you have classpath issue like NoDefClassError,... -->
+          <!-- useManifestOnlyJar>false</useManifestOnlyJar -->
+          <includes>
+            <include>**/*Test.*</include>
+            <include>**/*Suite.*</include>
+          </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.8</version>
+          <executions>
+            <execution>
+              <id>scp-to-remote</id>
+              <phase>package</phase>
+              <goals>
+                <goal>run</goal>
+              </goals>
+              <configuration>
+                <target>
+                  <!-- keyfile+passphrase or  password, choose one -->
+                  <!--
+                  <scp localFile="${project.basedir}/target/qos-spark-1.0.jar"
+                    remoteToFile="root@192.168.203.156:/usr/sanss" verbose="true"
+                    keyfile="C:\Users\shengw\.ssh\192.168.203.156\id_rsa"
+                    passphrase="">
+                  </scp>
+                   -->
+                  <scp localFile="${project.basedir}/target/scala-maven-test-1.0-SNAPSHOT.jar"
+                    remoteToFile="xxx@xxx.xxx.xxx.xxx:~/work/spark/code" verbose="true" port="22"
+                    password="xxx" trust="true">
+                  </scp>
+
+                  <sshexec host="xxx.xxx.xxx.xxx" trust="yes"
+                           username="xxx" password="xxx" port="22"
+                           command="sh ~/work/spark/code/spark_submit.sh" />
+                </target>
+              </configuration>
+            </execution>
+          </executions>
+          <!-- libraries for scp impl      -->
+          <!-- antrun doesn't use os's scp -->
+          <dependencies>
+            <dependency>
+              <groupId>com.jcraft</groupId>
+              <artifactId>jsch</artifactId>
+              <version>0.1.53</version>
+            </dependency>
+            <dependency>
+              <groupId>ant</groupId>
+              <artifactId>ant-jsch</artifactId>
+              <version>1.6.5</version>
+            </dependency>
+          </dependencies>
+    </plugin>
+
+    </plugins>
+  </build>
+</project>
