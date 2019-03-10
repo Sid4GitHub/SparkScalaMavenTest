@@ -44,6 +44,38 @@ object StructuredAPI {
     val myDf2 = spark.createDataFrame(myRDD2, myManualSchema2)
     myDf2.show()
 
+    /*
+    Only In Console
+    val myDF3 = Seq(("Hello", 2, 1L)).toDF("col1", "col2", "col3")
+    myDF3.show()*/
 
+    val df = spark.read.format("json").load(path+"/data/flight-data/json/2015_summary-ebaee.json")
+
+    df.select(
+      df.col("DEST_COUNTRY_NAME"),
+      col("DEST_COUNTRY_NAME"),
+      column("DEST_COUNTRY_NAME"),
+      //'DEST_COUNTRY_NAME,
+      //$"DEST_COUNTRY_NAME",
+      expr("DEST_COUNTRY_NAME"))
+      .show(2)
+
+    df.selectExpr(
+      "*" // include all original columns
+      ,"(DEST_COUNTRY_NAME = ORIGIN_COUNTRY_NAME) as withinCountry"
+    ).show(2)
+
+    df.withColumn("withinCountry", expr("ORIGIN_COUNTRY_NAME == DEST_COUNTRY_NAME"))
+      .show(2)
+
+    df.selectExpr("avg(count)", "count(distinct(DEST_COUNTRY_NAME))").show(2)
+
+    df.select(expr("*"), lit(1).as("One")).show(2)
+
+    df.withColumn("Destination", expr("DEST_COUNTRY_NAME")).columns
+
+    df.withColumnRenamed("DEST_COUNTRY_NAME", "dest").show(2)
+
+    df.withColumnRenamed("DEST_COUNTRY_NAME", "dest").show(2)
   }
 }
