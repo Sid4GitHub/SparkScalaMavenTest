@@ -77,5 +77,37 @@ object StructuredAPI {
     df.withColumnRenamed("DEST_COUNTRY_NAME", "dest").show(2)
 
     df.withColumnRenamed("DEST_COUNTRY_NAME", "dest").show(2)
+
+    val dfWithLongColName = df.withColumn(
+      "This Long Column-Name",
+      expr("ORIGIN_COUNTRY_NAME"))
+    dfWithLongColName.show(2)
+
+    dfWithLongColName.selectExpr(
+      "`This Long Column-Name`",
+      "`This Long Column-Name` as `new col`")
+      .show(2)
+
+    dfWithLongColName.createOrReplaceTempView("dfTableLong")
+
+    var x1=dfWithLongColName.select(col("This Long Column-Name")).columns
+
+    var y1=dfWithLongColName.select(expr("`This Long Column-Name`")).columns
+
+    var x2=df.columns
+    var y2=df.drop("ORIGIN_COUNTRY_NAME").columns
+
+    df.withColumn("count2", col("count").cast("string")).schema
+
+    df.filter(col("count") < 2).show(2)
+    df.where("count < 2").show(2)
+
+    df.select("ORIGIN_COUNTRY_NAME", "DEST_COUNTRY_NAME").distinct().count()
+    df.select( "DEST_COUNTRY_NAME").distinct().count()
+    df.select("ORIGIN_COUNTRY_NAME").distinct().count()
+
+    df.rdd.getNumPartitions
+
+
   }
 }
