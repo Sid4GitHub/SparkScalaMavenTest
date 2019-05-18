@@ -1,9 +1,7 @@
-package com.sid.scala.examples.test
+package com.sid.scala.spark.examples.test
 
-import com.sid.scala.common.GetSparkSession
+import com.sid.scala.spark.common.GetSparkSession
 import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types._
-import org.apache.spark.sql._
 
 object DifferentDataTypes {
   def printMe( ) : Unit = {

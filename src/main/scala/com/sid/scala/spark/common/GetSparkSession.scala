@@ -1,4 +1,4 @@
-package com.sid.scala.common
+package com.sid.scala.spark.common
 
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession

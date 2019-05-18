@@ -1,4 +1,4 @@
-package com.sid.scala.common
+package com.sid.scala.spark.common
 
 object StopSparkSession {
   def stop(): Unit ={

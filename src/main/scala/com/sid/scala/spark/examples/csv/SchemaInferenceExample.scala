@@ -1,6 +1,6 @@
-package com.sid.scala.examples.csv
+package com.sid.scala.spark.examples.csv
 
-import com.sid.scala.common.GetSparkSession
+import com.sid.scala.spark.common.GetSparkSession
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.functions.desc
 

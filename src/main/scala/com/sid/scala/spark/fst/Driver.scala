@@ -1,11 +1,7 @@
-package com.sid.scala.fst
-import com.sid.scala.common.StopSparkSession
-import com.sid.scala.examples.csv.SchemaInferenceExample
-import com.sid.scala.examples.test.RangeExample
-import org.apache.spark.sql.types.{LongType, StringType, StructField, StructType}
-import org.apache.spark.sql.{DataFrame, Row, SparkSession}
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkConf
+package com.sid.scala.spark.fst
+
+import com.sid.scala.spark.common.StopSparkSession
+import com.sid.scala.spark.examples.csv.SchemaInferenceExample
 
 
 object Driver {

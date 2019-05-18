@@ -1,6 +1,6 @@
-package com.sid.scala.examples.test
+package com.sid.scala.spark.examples.test
 
-import com.sid.scala.common.GetSparkSession
+import com.sid.scala.spark.common.GetSparkSession
 
 object RangeExample {
   def rangeExample(): Unit ={
